@@ -5,7 +5,7 @@ import psycopg2
 import psycopg2.extras
 
 
-def get_connection() -> psycopg2.connection:
+def get_connection():
     return psycopg2.connect(
         dbname="reti_production_ver2",
         host=os.getenv("PG_HOST", ""),
@@ -16,9 +16,10 @@ def get_connection() -> psycopg2.connection:
 
 
 def query(sql: str):
-    def _query(*args) -> list[dict[str, Any]]:
+    def _query(params: dict[str, Any]) -> list[dict[str, Any]]:
         with get_connection() as conn:
             with conn.cursor() as cur:
-                cur.execute(sql)
+                cur.execute(sql, params)
                 return cur.fetchall()
+
     return _query
