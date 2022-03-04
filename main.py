@@ -1,6 +1,6 @@
 from typing import Any
 from tms.tms_controller import tms_controller
-from tasks.tasks_service import task_service
+from tasks.tasks_service import tasks_service
 
 def main(request):
     data: dict[str, Any] = request.get_json()
@@ -10,7 +10,7 @@ def main(request):
     if "table" in data:
         response = tms_controller(data)
     elif "tasks" in data:
-        response = task_service(data)
+        response = tasks_service(data)
     else:
         raise ValueError(data)
 

@@ -2,7 +2,7 @@ from tms import pipeline
 from tasks import cloud_tasks
 
 
-def task_service(body: dict[str, str]):
+def tasks_service(body: dict[str, str]):
     return {
         "tasks": cloud_tasks.create_tasks(
             [
